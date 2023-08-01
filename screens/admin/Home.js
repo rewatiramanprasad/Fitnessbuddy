@@ -14,7 +14,7 @@ export default function Home() {
       <View
         style={{ margin:20,flex: 1, flexDirection: "column",border:2,borderWidth:4 }}
       >
-        <View style={[styles.flex,styles.border]}></View>
+        <View style={[styles.flex,styles.border]}> Name </View>
         <View style={[styles.flex,styles.border]}></View>
       </View>
 

@@ -124,6 +124,9 @@ export default function Members() {
   return (
     <View style={[styles.outerContainer, { flexDirection: "column" }]}>
       <View style={{ flexDirection: "row" }}>
+      <PrimaryButton style={{ flex: 1 ,borderRadius:100}} onPress={startModal}>
+          +
+        </PrimaryButton>
         <TextInput
           placeholderColor="red"
           style={{
@@ -138,9 +141,7 @@ export default function Members() {
           }}
           placeholder="search ..."
         />
-        <PrimaryButton style={{ flex: 1 }} onPress={startModal}>
-          Add member
-        </PrimaryButton>
+        
       </View>
       <View>
         <RegisterMember visible={isVisible} endModal={endModal} />

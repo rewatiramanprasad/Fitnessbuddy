@@ -11,52 +11,12 @@ import React, { StrictMode, useState } from "react";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import RegisterMember from "../../components/common/RegisterMember";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MemberList from "../../components/common/MemberList";
 
-
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={[
-      styles.item,
-      { backgroundColor },
-      {
-        borderRadius: 50,
-        padding: 10,
-        borderWidth: 2,
-        marginVertical: 8,
-        marginHorizontal: 16,
-      },
-    ]}
-  >
-    <View
-      style={{
-        flexDirection: "row",
-        border: 2,
-        borderColor: "black",
-      }}
-    >
-      <View style={{ flex: 1 }}>
-        <img
-          style={{ height: 40, width: 40, border: 1, borderRadius: 100 }}
-          src={item.avatarUrl}
-        />
-      </View>
-      <View style={{ flex: 3, flexDirection: "column" }}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={[styles.title, { color: textColor, flex: 2 }]}>
-            {item.fullName}
-          </Text>
-          <Text style={{ flex: 1 }}>{item.timeStamp}</Text>
-        </View>
-        <Text>{item.recentText}</Text>
-      </View>
-    </View>
-  </TouchableOpacity>
-);
 
 export default function Members() {
   const [isVisible, setVisible] = useState(false);
-  function endModal() {
+    function endModal() {
     setVisible(false);
   }
   function startModal() {
@@ -106,20 +66,20 @@ export default function Members() {
 
   const [selectedId, setSelectedId] = useState();
 
-  const render = ({ item }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
-    const color = item.id === selectedId ? "white" : "black";
+  // const render = ({ item }) => {
+  //   const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+  //   const color = item.id === selectedId ? "white" : "black";
 
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        backgroundColor={backgroundColor}
-        textColor={color}
-        style={{ margin: 30, padding: 20 }}
-      />
-    );
-  };
+  //   return (
+  //     <Item
+  //       item={MemberList}
+  //       onPress={() => setSelectedId(item.id)}
+  //       backgroundColor={backgroundColor}
+  //       textColor={color}
+  //       style={{ margin: 30, padding: 20 }}
+  //     />
+  //   );
+  // };
 
   return (
     <View style={[styles.outerContainer, { flexDirection: "column" }]}>
@@ -147,7 +107,7 @@ export default function Members() {
         <RegisterMember visible={isVisible} endModal={endModal} />
         <FlatList
           data={Users}
-          renderItem={render}
+          renderItem={MemberList}
           keyExtractor={(item) => item.id}
         />
       </View>

@@ -5,6 +5,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Home from "./screens/admin/Home";
 import Social from "./screens/admin/Social";
 import Members from "./screens/admin/Members";
+import Profile from "./screens/admin/Profile";
+import Login from "./screens/admin/Login";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -12,14 +14,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Members"
+        initialRouteName="Home"
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "orangered" }}
       >
         <Tab.Screen
           name="Home"
-          component={Home}
+          component={Login}
           options={{
             tabBarLabel: "Home",
             tabBarIcon: ({ color }) => (
@@ -53,7 +55,7 @@ export default function App() {
         />
         <Tab.Screen
           name="Profile"
-          component={Social}
+          component={Profile}
           options={{
             tabBarLabel: "Profile",
             tabBarIcon: () => (

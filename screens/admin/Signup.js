@@ -5,12 +5,11 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import PrimaryButton from "../../components/common/PrimaryButton";
 
 import { createClient } from "@supabase/supabase-js";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = ({ navigation }) => {
+const Signup = ({navigation}) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-  const [email, setEmail] = useState("ramanprasad.0203@gmail.com");
-  const [password, setPassword] = useState("Raman@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const supabaseUrl = "https://zyqpgpdsddwpfzfasjtc.supabase.co";
   const supabaseKey =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5cXBncGRzZGR3cGZ6ZmFzanRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQzNjk2MDksImV4cCI6MjAwOTk0NTYwOX0.mpZR4-LLwwKKR_ONf_yNZU1dkWy9P_4VI3Cin8CMYQo";
@@ -27,49 +26,26 @@ const Login = ({ navigation }) => {
   //   }
   //   console.log(data);
   // };
-  const setLoginData = async (data) => {
-    try {
-      await AsyncStorage.setItem("user",JSON.stringify(data["user"]));
-      await AsyncStorage.setItem("session",JSON.stringify(data["session"]));
-    } catch (error) {
-      console.log(error);
-    }
-   
-    
-    // console.log(AsyncStorage.getItem('user'))
-  };
-  const logout = async () => {
-    try {
-      await AsyncStorage.removeItem("user");
-      await AsyncStorage.removeItem("session");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const login = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(data);
-      setLoginData(data);
-      navigation.navigate("AdminDashboard")
-    }
-  };
-
+// const login=async()=>{
+  
+// const { data, error } = await supabase.auth.signInWithPassword({
+//   email: email,
+//   password: password,
+// })
+// if (error) {
+//       console.log(error);
+//     }
+// console.log(data);
+// }
   return (
     <View style={styles.container}>
       <View style={styles.titleConatiner}>
-        <Text style={styles.title}>💪ogin</Text>
+        <Text style={styles.title}>Signup</Text>
       </View>
       <View style={styles.titleConatiner}>
         <TextInput
           placeholder="User Name"
           style={{ width: 270 }}
-          value={email}
           onChangeText={(e) => {
             setEmail(e);
           }}
@@ -78,7 +54,6 @@ const Login = ({ navigation }) => {
           placeholder="Password"
           style={{ width: 270, backgroundColor: "yellow" }}
           secureTextEntry={isPasswordSecure}
-          value={password}
           onChangeText={(e) => {
             setPassword(e);
           }}
@@ -99,21 +74,14 @@ const Login = ({ navigation }) => {
             />
           }
         />
-        <PrimaryButton style={styles.Button} onPress={login}>
-          Login
-        </PrimaryButton>
-        <Text onPress={() => navigation.navigate("AdminDashboard")}>
-          Signup
-        </Text>
-        <Text onPress={logout}>
-          logout
-        </Text>
+        <PrimaryButton style={styles.Button}>Signup</PrimaryButton>
+        <Text  onPress={() => navigation.navigate("Home")}>Login</Text>
       </View>
     </View>
   );
 };
 
-export default Login;
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
@@ -133,6 +101,6 @@ const styles = StyleSheet.create({
   },
   Button: {
     fontWeight: "bold",
-    backgroundColor: "Blue",
+    backgroundColor: "Orangered",
   },
 });

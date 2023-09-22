@@ -93,7 +93,6 @@ export default function Members() {
             flex: 2,
             borderColor: "red",
             backgroundColor: "grey",
-            border: 3,
             color: "white",
             borderRadius: 50,
             paddingLeft: 20,

@@ -1,27 +1,57 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Home() {
+export default function Home({ navigation }) {
+  const [user,setUser]=useState("")
+const getData=async()=>{
+  try {
+    const savedUser = await AsyncStorage.getItem("user");
+    const currentUser = JSON.parse(savedUser);
+    console.log(currentUser);
+    setUser(currentUser)
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const logout = async () => {
+  try {
+    await AsyncStorage.removeItem("user");
+    await AsyncStorage.removeItem("session");
+    navigation.navigate("Login")
+
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
+  
   return (
     <View
-      style={{
-        flex: 1,
-        flexDirection: "row",
-      padding:20,
+      // style={{
+      //   flex: 1,
+      //   flexDirection: "row",
+      // padding:20,
       
-      }}
+// }}
+     
     >
-      <View
+      <Text>{user.id}</Text>
+       <Button title="get data" onPress={getData}/>
+       <Button title="Logout" onPress={logout}/>
+
+      {/* <View
         style={{ margin:20,flex: 1, flexDirection: "column",border:2,borderWidth:4 }}
       >
-        <View style={[styles.flex,styles.border]}> Name </View>
+        <View style={[styles.flex,styles.border]}> </View>
         <View style={[styles.flex,styles.border]}></View>
-      </View>
+      </View> */}
 
-      <View style={styles.flex}>
+      {/* <View style={styles.flex}>
         <View style={[styles.flex,styles.border]}></View>
         <View style={[styles.flex,styles.border]}></View>
-      </View>
+      </View> */}
     </View>
   );
 }

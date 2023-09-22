@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native'
 import React, { useState } from 'react'
 // import { Switch } from 'react-native-paper'
 import SwitchButton from './SwitchButton'
@@ -28,7 +28,7 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
             }}
           >
             <View style={{ flex: 1 }}>
-              <img
+              <Image
                 style={{ height: 40, width: 40, border: 1, borderRadius: 100 }}
                 src={item.avatarUrl}
               />

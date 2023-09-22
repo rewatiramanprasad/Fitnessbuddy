@@ -4,7 +4,7 @@ import { Searchbar, TextInput } from 'react-native-paper'
 import PrimaryButton from '../../components/common/PrimaryButton'
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Heart from "react-animated-heart"
-import ShapeButton from '../../components/common/shapeButton';
+import ShapeButton from '../../components/common/ShapeButton';
 import DescButton from '../../components/common/DescButton';
 export default function Social() {
   const Post = [
@@ -70,7 +70,7 @@ export default function Social() {
       </View>
       <View style={styles.postContainer}>
        {Post.map((value)=>(<View  key={value.id} style={styles.postContainer}>
-        <img src={value.avatarUrl} style={styles.imageContainer} />
+        <Image src={value.avatarUrl} style={styles.imageContainer} />
         {/* <Heart isClick={isClick} onClick={() => setClick(!isClick)} /> */}
         {/* <MaterialCommunityIcons name="People" color="black" size={26}/> */}
         <View style={styles.ButtonConainer}>

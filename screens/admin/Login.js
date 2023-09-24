@@ -4,17 +4,18 @@ import { TextInput } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import PrimaryButton from "../../components/common/PrimaryButton";
 
-import { createClient } from "@supabase/supabase-js";
+// import { createClient } from "@supabase/supabase-js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import SupabaseAuth from "../Utilities/SupabaseAuth";
 const Login = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [email, setEmail] = useState("ramanprasad.0203@gmail.com");
   const [password, setPassword] = useState("Raman@123");
-  const supabaseUrl = "https://zyqpgpdsddwpfzfasjtc.supabase.co";
-  const supabaseKey =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5cXBncGRzZGR3cGZ6ZmFzanRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQzNjk2MDksImV4cCI6MjAwOTk0NTYwOX0.mpZR4-LLwwKKR_ONf_yNZU1dkWy9P_4VI3Cin8CMYQo";
-  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  // const supabaseUrl = "https://zyqpgpdsddwpfzfasjtc.supabase.co";
+  // const supabaseKey =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5cXBncGRzZGR3cGZ6ZmFzanRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQzNjk2MDksImV4cCI6MjAwOTk0NTYwOX0.mpZR4-LLwwKKR_ONf_yNZU1dkWy9P_4VI3Cin8CMYQo";
+  // const supabase = createClient(supabaseUrl, supabaseKey);
   // const signup = async () => {
   //   console.log("signup is calling ");
   //   console.log(email,password)
@@ -29,13 +30,13 @@ const Login = ({ navigation }) => {
   // };
   const setLoginData = async (data) => {
     try {
-      await AsyncStorage.setItem("user",JSON.stringify(data["user"]));
-      await AsyncStorage.setItem("session",JSON.stringify(data["session"]));
+      await AsyncStorage.setItem("isLoggedIn", true);
+      await AsyncStorage.setItem("user", JSON.stringify(data["user"]));
+      await AsyncStorage.setItem("session", JSON.stringify(data["session"]));
     } catch (error) {
       console.log(error);
     }
-   
-    
+
     // console.log(AsyncStorage.getItem('user'))
   };
   const logout = async () => {
@@ -47,7 +48,7 @@ const Login = ({ navigation }) => {
     }
   };
   const login = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await SupabaseAuth.auth.signInWithPassword({
       email: email,
       password: password,
     });
@@ -56,7 +57,7 @@ const Login = ({ navigation }) => {
     } else {
       console.log(data);
       setLoginData(data);
-      navigation.navigate("AdminDashboard")
+      navigation.navigate("AdminDashboard");
     }
   };
 
@@ -105,9 +106,7 @@ const Login = ({ navigation }) => {
         <Text onPress={() => navigation.navigate("AdminDashboard")}>
           Signup
         </Text>
-        <Text onPress={logout}>
-          logout
-        </Text>
+        <Text onPress={logout}>logout</Text>
       </View>
     </View>
   );

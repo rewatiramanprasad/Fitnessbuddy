@@ -59,7 +59,7 @@ export default function AdminDashboard() {
      
     // <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Members"
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "orangered" }}

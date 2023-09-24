@@ -4,7 +4,7 @@ import { Searchbar, TextInput } from 'react-native-paper'
 import PrimaryButton from '../../components/common/PrimaryButton'
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Heart from "react-animated-heart"
-import ShapeButton from '../../components/common/ShapeButton';
+import ShapeButton from '../../components/common/shapeButton';
 import DescButton from '../../components/common/DescButton';
 export default function Social() {
   const Post = [

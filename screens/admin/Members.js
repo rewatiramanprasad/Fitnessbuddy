@@ -12,6 +12,7 @@ import PrimaryButton from "../../components/common/PrimaryButton";
 import RegisterMember from "../../components/common/RegisterMember";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MemberList from "../../components/common/MemberList";
+import SupabaseAuth from "../Utilities/SupabaseAuth";
 
 
 export default function Members() {

@@ -1,11 +1,11 @@
 // import * as React from "react";
-import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from "react";
+import { Text, View } from "react-native";
 // import * as Font from 'expo-font';
 // import Entypo from '@expo/vector-icons/Entypo';
 // import * as SplashScreen from 'expo-splash-screen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // import Home from "./screens/admin/Home";
 // import Social from "./screens/admin/Social";
@@ -13,16 +13,27 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import Profile from "./screens/admin/Profile";
 import Login from "./screens/admin/Login";
 
-import AdminDashboard from './screens/admin/AdminDashboard';
-import Home from './screens/admin/Home';
-import 'react-native-url-polyfill/auto';
-import Signup from './screens/admin/signup';
+import AdminDashboard from "./screens/admin/AdminDashboard";
+import Home from "./screens/admin/Home";
+import "react-native-url-polyfill/auto";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import ThanksYou from "./screens/admin/ThankYou";
+import MemberList from "./components/common/MemberList";
+// import Signup from './screens/admin/signup';
 
 const Stack = createNativeStackNavigator();
 // SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState("");
+  const _retriveData = async () => {
+    const data = await AsyncStorage.getItem("isLoggedIn");
+    console.warn("is user logged in ", data);
+    setIsLoggedIn(data);
+  };
+  useEffect(() => {
+    _retriveData();
+  }, []);
   // useEffect(() => {
   //   async function prepare() {
   //     try {
@@ -56,31 +67,26 @@ export default function App() {
   // if (!appIsReady) {
   //   return null;
   // }
-  
+
   // onLayoutRootView();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="Login"
-          component={Login}
-        />
-      <Stack.Screen
-          name="Signup"
-          component={Signup}
-        />
-        
+        {isLoggedIn || true ? (
+          <>
+            <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
+            <Stack.Screen name="MemberList" component={MemberList} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={Login} />
+          </>
+        )}
 
-        <Stack.Screen
-          name="AdminDashboard"
-          component={AdminDashboard}
-        />
-       
-
-        
+        <Stack.Group>
+          <Stack.Screen name="ThanksYou" component={ThanksYou} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
-     
-   
   );
 }

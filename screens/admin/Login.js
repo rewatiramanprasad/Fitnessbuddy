@@ -29,6 +29,7 @@ const Login = ({ navigation }) => {
   // };
   const setLoginData = async (data) => {
     try {
+      await AsyncStorage.setItem("isUserLogin",true);
       await AsyncStorage.setItem("user",JSON.stringify(data["user"]));
       await AsyncStorage.setItem("session",JSON.stringify(data["session"]));
     } catch (error) {

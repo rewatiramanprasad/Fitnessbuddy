@@ -63,6 +63,7 @@ export default function AdminDashboard() {
         activeColor="#f0edf6"
         inactiveColor="#3e2465"
         barStyle={{ backgroundColor: "orangered" }}
+        screenOptions={{ headerShown: false }}
       >
         <Tab.Screen
           name="Home"

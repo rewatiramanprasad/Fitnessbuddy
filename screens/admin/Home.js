@@ -19,9 +19,9 @@ const logout = async () => {
   try {
     await AsyncStorage.removeItem("user");
     await AsyncStorage.removeItem("session");
-    navigation.navigate("Login")
+    await AsyncStorage.setItem("isUserLogin",false);
+    // navigation.navigate("Login")           
 
-    
   } catch (error) {
     console.log(error);
   }

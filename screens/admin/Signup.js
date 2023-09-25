@@ -14,29 +14,19 @@ const Signup = ({navigation}) => {
   const supabaseKey =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5cXBncGRzZGR3cGZ6ZmFzanRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTQzNjk2MDksImV4cCI6MjAwOTk0NTYwOX0.mpZR4-LLwwKKR_ONf_yNZU1dkWy9P_4VI3Cin8CMYQo";
   const supabase = createClient(supabaseUrl, supabaseKey);
-  // const signup = async () => {
-  //   console.log("signup is calling ");
-  //   console.log(email,password)
-  //   let { data, error } = await supabase.auth.signUp({
-  //     email: email,
-  //     password: password,
-  //   });
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  //   console.log(data);
-  // };
-// const login=async()=>{
-  
-// const { data, error } = await supabase.auth.signInWithPassword({
-//   email: email,
-//   password: password,
-// })
-// if (error) {
-//       console.log(error);
-//     }
-// console.log(data);
-// }
+  const signupCall = async () => {
+    console.log("signup is calling ");
+    console.log(email,password)
+    let { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleConatiner}>
@@ -74,7 +64,7 @@ const Signup = ({navigation}) => {
             />
           }
         />
-        <PrimaryButton style={styles.Button}>Signup</PrimaryButton>
+        <PrimaryButton style={styles.Button} onPress={signupCall}>Signup</PrimaryButton>
         <Text  onPress={() => navigation.navigate("Home")}>Login</Text>
       </View>
     </View>
@@ -83,24 +73,24 @@ const Signup = ({navigation}) => {
 
 export default Signup;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "whitesmoke",
-    flexDirection: "column",
-    padding: 50,
-  },
-  titleConatiner: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-  Button: {
-    fontWeight: "bold",
-    backgroundColor: "Orangered",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "whitesmoke",
+//     flexDirection: "column",
+//     padding: 50,
+//   },
+//   titleConatiner: {
+//     justifyContent: "center",
+//     alignItems: "center",
+//     padding: 20,
+//   },
+//   title: {
+//     fontWeight: "bold",
+//     fontSize: 30,
+//   },
+//   Button: {
+//     fontWeight: "bold",
+//     backgroundColor: "Orangered",
+//   },
+// });

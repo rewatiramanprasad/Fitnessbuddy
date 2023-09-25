@@ -35,5 +35,19 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "description": "rnfs/rnfes",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rewatiramanprasad/Fitnessbuddy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rewatiramanprasad/Fitnessbuddy/issues"
+  },
+  "homepage": "https://github.com/rewatiramanprasad/Fitnessbuddy#readme"
 }

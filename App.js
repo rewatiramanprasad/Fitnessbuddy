@@ -16,26 +16,23 @@ import Login from "./screens/admin/Login";
 import AdminDashboard from "./screens/admin/AdminDashboard";
 import Home from "./screens/admin/Home";
 import "react-native-url-polyfill/auto";
-import Signup from "./screens/admin/signup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ThanksYou from "./screens/admin/ThankYou";
+import MemberList from "./components/common/MemberList";
+// import Signup from './screens/admin/signup';
 
 const Stack = createNativeStackNavigator();
 // SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
-
-  const _retiveData = async () => {
-    try {
-      const data = await AsyncStorage.getItem("isUserLogin");
-      console.log("is userLoggedIn",data)
-      setIsLogged(data);
-    } catch (error) {
-      console.warn("error");
-    }
+  const [isLoggedIn, setIsLoggedIn] = useState("");
+  const _retriveData = async () => {
+    const data = await AsyncStorage.getItem("isLoggedIn");
+    console.warn("is user logged in ", data);
+    setIsLoggedIn(data);
   };
   useEffect(() => {
-    _retiveData();
+    _retriveData();
   }, []);
   // useEffect(() => {
   //   async function prepare() {
@@ -74,18 +71,21 @@ export default function App() {
   // onLayoutRootView();
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {isLogged ? (
-          <Stack.Group>
+      <Stack.Navigator>
+        {isLoggedIn || true ? (
+          <>
             <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
-            {/* <Stack.Screen name="Login" component={Login} /> */}
-          </Stack.Group>
+            <Stack.Screen name="MemberList" component={MemberList} />
+          </>
         ) : (
-          <Stack.Group>
+          <>
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
-          </Stack.Group>
+          </>
         )}
+
+        <Stack.Group>
+          <Stack.Screen name="ThanksYou" component={ThanksYou} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

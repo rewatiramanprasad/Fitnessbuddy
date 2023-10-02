@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 
-import SupabaseAuth from "../../screens/Utilities/SupabaseAuth";
+import supabase from "../../screens/Utilities/SupabaseAuth";
 
 export default function RegisterMember(props) {
   const [name, setName] = useState("");
@@ -18,9 +18,9 @@ export default function RegisterMember(props) {
   const [weight, setWeight] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [Password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [subscription, setSubscription] = useState("");
-  const [aadharNo, setAadharNo] = useState("");
+  const [aadhar, setAadhar] = useState("");
   const setTextAsEmpty = () => {
     setName("");
     setAge("");
@@ -29,23 +29,33 @@ export default function RegisterMember(props) {
     setWeight("");
     setPassword("");
     setSubscription("");
-    setAadharNo("");
+    setAadhar("");
   };
   const insertData = async () => {
-    const { error } = await SupabaseAuth.from("Members").insert({
-      name: name,
-      age: age,
-      weight: weight,
-      phone: phone,
-      email: email,
-      password: password,
-      subscription: subscription,
-      aadharNo: aadharNo,
-    });
+    const { data, error } = await supabase
+      .from("members")
+      .insert([
+        {
+          name: name,
+          age: age,
+          weight: weight,
+          phone: phone,
+          email: email,
+          password: password,
+          subscription: subscription,
+          aadhar: aadhar,
+        },
+      ])
+      .select();
     if (error) {
-      console.warn(error);
+      console.log(error);
     }
-  };``
+    console.log(data,error);
+    if (data) {
+      console.log(data);
+      console.warn("New member added successfully.Check mail and verify it");
+    }
+  };
   // useEffect(() => {
 
   // }, []);
@@ -104,7 +114,7 @@ export default function RegisterMember(props) {
           onChangeText={(e) => {
             setPassword(e);
           }}
-          value={Password}
+          value={password}
         />
         <TextInput
           style={styles.textInput}
@@ -118,9 +128,9 @@ export default function RegisterMember(props) {
           style={styles.textInput}
           placeholder="AadharNo"
           onChangeText={(e) => {
-            setAadharNo(e);
+            setAadhar(e);
           }}
-          value={aadharNo}
+          value={aadhar}
         />
 
         <View style={styles.buttonContainer}>

@@ -1,12 +1,14 @@
+import 'react-native-url-polyfill/auto'
 import { createClient } from "@supabase/supabase-js";
 import { supabaseUrl, supabaseKey } from "../../env/credentials.json";
-// const SupabaseAuth = () => {
-// const supabaseUrl = "https://zyqpgpdsddwpfzfasjtc.supabase.co";
-// const supabaseKey =
-console.log(supabaseUrl);
-const supabase = createClient(supabaseUrl, supabaseKey);
-console.log(supabase);
-// return supabase;
-// };
+
+const supabase = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+    //   storage: AsyncStorage,
+      autoRefreshToken: true,
+      persistSession: false,
+      detectSessionInUrl: false,
+    },
+  });
 
 export default supabase;

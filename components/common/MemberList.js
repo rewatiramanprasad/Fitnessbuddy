@@ -29,7 +29,7 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
       >
         <View style={{ flex: 1 }}>
           <Image
-            style={{ height: 40, width: 40, border: 1, borderRadius: 100 }}
+            style={{ height: 40, width: 40, borderRadius: 100 }}
             src={item.avatarUrl}
           />
         </View>

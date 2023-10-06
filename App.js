@@ -15,7 +15,7 @@ import Login from "./screens/admin/Login";
 
 import AdminDashboard from "./screens/admin/AdminDashboard";
 import Home from "./screens/admin/Home";
-import "react-native-url-polyfill/auto";
+// import "react-native-url-polyfill/auto";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ThanksYou from "./screens/admin/ThankYou";
 import MemberList from "./components/common/MemberList";
@@ -24,12 +24,16 @@ import MemberList from "./components/common/MemberList";
 const Stack = createNativeStackNavigator();
 // SplashScreen.preventAutoHideAsync();
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState("");
+  // const [appIsReady, setAppIsReady] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const _retriveData = async () => {
-    const data = await AsyncStorage.getItem("isLoggedIn");
-    console.warn("is user logged in ", data);
+    const data = JSON.parse(await AsyncStorage.getItem("isLoggedIn"));
+    console.log("is user logged ", typeof( data),data);
+    if (data==null){
+      setIsLoggedIn(false)
+    }
     setIsLoggedIn(data);
+
   };
   useEffect(() => {
     _retriveData();
@@ -71,8 +75,11 @@ export default function App() {
   // onLayoutRootView();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {isLoggedIn || true ? (
+      <Stack.Navigator 
+                  screenOptions={{ headerShown: false }} 
+
+      >
+        { isLoggedIn|| false ? (
           <>
             <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
             <Stack.Screen name="MemberList" component={MemberList} />
@@ -80,6 +87,7 @@ export default function App() {
         ) : (
           <>
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
           </>
         )}
 

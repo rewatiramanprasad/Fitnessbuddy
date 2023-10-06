@@ -51,7 +51,7 @@ export default function RegisterMember(props) {
       console.log(error);
     }
     console.log(data,error);
-    if (data) {
+    if (data.length) {
       console.log(data);
       console.warn("New member added successfully.Check mail and verify it");
     }

@@ -13,17 +13,18 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
         { backgroundColor },
         {
           borderRadius: 50,
-          padding: 10,
-          borderWidth: 2,
-          marginVertical: 8,
-          marginHorizontal: 16,
+          padding: 0,
+          borderWidth: 1,
+          marginVertical: 6,
+          marginHorizontal: 2,
+          
         },
       ]}
     >
       <View
         style={{
           flexDirection: "row",
-          border: 2,
+          border: 1,
           borderColor: "black",
         }}
       >
@@ -33,8 +34,14 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
             src={item.avatarUrl}
           />
         </View>
-        <View style={{ flex: 3, flexDirection: "column" }}>
-          <Text>{item.recentText}</Text>
+        <View style={{ flex: 1, flexDirection: "column" }}>
+          <Text>{item.name}</Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Text>{item.subscription}</Text>
+        </View>
+        <View style={{ flex: 1.2 }}>
+          <Text>{item.phone}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <SwitchButton />

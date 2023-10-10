@@ -12,7 +12,7 @@ import {
 
 import supabase from "../../screens/Utilities/SupabaseAuth";
 
-export default function RegisterMember(props) {
+export default function RegisterMember(props,{ navigation }) {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
@@ -50,10 +50,11 @@ export default function RegisterMember(props) {
     if (error) {
       console.log(error);
     }
-    console.log(data,error);
+    console.log(data, error);
     if (data.length) {
       console.log(data);
       console.warn("New member added successfully.Check mail and verify it");
+      navigation.navigate("Members");
     }
   };
   // useEffect(() => {

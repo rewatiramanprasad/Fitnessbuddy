@@ -1,16 +1,16 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import { TextInput } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import PrimaryButton from "../../components/common/PrimaryButton";
 
-// import { createClient } from "@supabase/supabase-js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SupabaseAuth from "../Utilities/SupabaseAuth";
 const Login = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [email, setEmail] = useState("ramanprasad.0203@gmail.com");
   const [password, setPassword] = useState("Raman@123");
+  const [loading, setLoading] = useState(false);
 
   // const supabaseUrl = "https://zyqpgpdsddwpfzfasjtc.supabase.co";
   // const supabaseKey =
@@ -48,13 +48,18 @@ const Login = ({ navigation }) => {
     }
   };
   const login = async () => {
+    setLoading(true);
     const { data, error } = await SupabaseAuth.auth.signInWithPassword({
       email: email,
       password: password,
     });
     if (error) {
       console.log(error);
+      console.log("error part");
+      Alert.alert(error.message);
+      setLoading(false);
     } else {
+      setLoading(false);
       console.log(data);
       setLoginData(data);
       navigation.navigate("AdminDashboard");
@@ -63,50 +68,56 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleConatiner}>
-        <Text style={styles.title}>💪ogin</Text>
-      </View>
-      <View style={styles.titleConatiner}>
-        <TextInput
-          placeholder="User Name"
-          style={{ width: 270 }}
-          value={email}
-          onChangeText={(e) => {
-            setEmail(e);
-          }}
-        />
-        <TextInput
-          placeholder="Password"
-          style={{ width: 270, backgroundColor: "yellow" }}
-          secureTextEntry={isPasswordSecure}
-          value={password}
-          onChangeText={(e) => {
-            setPassword(e);
-          }}
-          right={
-            <TextInput.Icon
-              name={() => (
-                <MaterialCommunityIcons
-                  name={isPasswordSecure ? "eye-off" : "eye"}
-                  size={28}
-                  color="black"
-                />
-              )} // where <Icon /> is any component from vector-icons or anything else
-              onPress={() => {
-                isPasswordSecure
-                  ? setIsPasswordSecure(false)
-                  : setIsPasswordSecure(true);
-              }}
-            />
-          }
-        />
-        <PrimaryButton style={styles.Button} onPress={login}>
-          Login
-        </PrimaryButton>
-        <Text onPress={() => navigation.navigate("AdminDashboard")}>
-          Signup
-        </Text>
-        <Text onPress={logout}>logout</Text>
+      <View style={{ elevate: 10, backgroundColor: "rgb(229 225 245)" }}>
+        <View style={styles.titleConatiner}>
+          <Text style={styles.title}>💪ogin</Text>
+        </View>
+        <View style={styles.titleConatiner}>
+          <TextInput
+            placeholder="User Name"
+            style={{ width: 270 }}
+            value={email}
+            onChangeText={(e) => {
+              setEmail(e);
+            }}
+          />
+          <TextInput
+            placeholder="Password"
+            style={{ width: 270 }}
+            secureTextEntry={isPasswordSecure}
+            value={password}
+            onChangeText={(e) => {
+              setPassword(e);
+            }}
+            right={
+              <TextInput.Icon
+                name={() => (
+                  <MaterialCommunityIcons
+                    name={isPasswordSecure ? "eye-off" : "eye"}
+                    size={28}
+                    color="black"
+                  />
+                )} // where <Icon /> is any component from vector-icons or anything else
+                onPress={() => {
+                  isPasswordSecure
+                    ? setIsPasswordSecure(false)
+                    : setIsPasswordSecure(true);
+                }}
+              />
+            }
+          />
+          {loading ? (
+            <ActivityIndicator size="large" color="orangered" />
+          ) : (
+            <PrimaryButton style={styles.Button} onPress={login}>
+              Login
+            </PrimaryButton>
+          )}
+          <Text onPress={() => navigation.navigate("AdminDashboard")}>
+            Signup
+          </Text>
+          <Text onPress={logout}>logout</Text>
+        </View>
       </View>
     </View>
   );
@@ -117,7 +128,9 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "whitesmoke",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
     flexDirection: "column",
     padding: 50,
   },

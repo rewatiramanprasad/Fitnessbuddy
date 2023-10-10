@@ -12,7 +12,10 @@
     "start": {
       "name": "start",
       "command": "npm run start",
-      "runAtStart": true
+      "runAtStart": true,
+      "preview": {
+        "port": 8081
+      }
     },
     "android": {
       "name": "android",
@@ -31,6 +34,14 @@
       "preview": {
         "port": 19006
       }
+    },
+    "sdk ": {
+      "name": "android",
+      "command": "sdk "
+    },
+    "choco install -y nodejs-lts microsoft-openjdk11": {
+      "name": "node",
+      "command": "choco install -y nodejs-lts microsoft-openjdk11"
     }
   }
 }

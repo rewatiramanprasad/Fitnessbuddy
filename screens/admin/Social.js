@@ -1,12 +1,13 @@
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import { Searchbar, TextInput } from 'react-native-paper'
-import PrimaryButton from '../../components/common/PrimaryButton'
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { Searchbar, TextInput } from "react-native-paper";
+import PrimaryButton from "../../components/common/PrimaryButton";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Heart from "react-animated-heart"
+import Heart from "react-animated-heart";
 // import ShapeButton from '../../components/common/shapeButton';
-import ShapeButton from '../../components/common/ShapeButton'
-import DescButton from '../../components/common/DescButton';
+// import ShapeButton from '../../components/common/ShapeButton'
+import ShapeButton from "../../components/common/ShapeButton";
+import DescButton from "../../components/common/DescButton";
 export default function Social() {
   const Post = [
     {
@@ -49,70 +50,72 @@ export default function Social() {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU",
     },
   ];
-  const [isClick, setClick] = useState(true)
-  const [isDesClick, setDesClick] = useState(true)
+  const [isClick, setClick] = useState(true);
+  const [isDesClick, setDesClick] = useState(true);
   // const [clicked, setClicked] = useState(false);
   // const[liked,setLiked]=useState(false);
-  function pressLiked(){
-    setClick((isClick)=>!isClick);
+  function pressLiked() {
+    setClick((isClick) => !isClick);
   }
-  function pressDesc(){
-    setDesClick((isDesClick)=>!isDesClick);
+  function pressDesc() {
+    setDesClick((isDesClick) => !isDesClick);
   }
   return (
-    <ScrollView  style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.Searchbar}>
-      {/* <TextInput 
+        {/* <TextInput 
       style={{flex:2}}
       placeholder=' Search your post here '
       /> */}
-      <Searchbar style={{flex:2}} placeholder='Search your post' />
-      {/* <PrimaryButton style={{flex:1,padding:10}}>Search</PrimaryButton> */}
+        <Searchbar style={{ flex: 2 }} placeholder="Search your post" />
+        {/* <PrimaryButton style={{flex:1,padding:10}}>Search</PrimaryButton> */}
       </View>
       <View style={styles.postContainer}>
-       {Post.map((value)=>(<View  key={value.id} style={styles.postContainer}>
-        <Image src={value.avatarUrl} style={styles.imageContainer} />
-        {/* <Heart isClick={isClick} onClick={() => setClick(!isClick)} /> */}
-        {/* <MaterialCommunityIcons name="People" color="black" size={26}/> */}
-        <View style={styles.ButtonConainer}>
-        <ShapeButton isClick={isClick} pressLiked={pressLiked}></ShapeButton>
-        <DescButton isDesClick={isDesClick} pressDesc={pressDesc} ></DescButton>
-        </View>
-        <Text>{value.fullName}</Text>
-        <Text>{value.recentText}</Text>
-        </View>))}
+        {Post.map((value) => (
+          <View key={value.id} style={styles.postContainer}>
+            <Image src={value.avatarUrl} style={styles.imageContainer} />
+            {/* <Heart isClick={isClick} onClick={() => setClick(!isClick)} /> */}
+            {/* <MaterialCommunityIcons name="People" color="black" size={26}/> */}
+            <View style={styles.ButtonConainer}>
+              <ShapeButton
+                isClick={isClick}
+                pressLiked={pressLiked}
+              ></ShapeButton>
+              <DescButton
+                isDesClick={isDesClick}
+                pressDesc={pressDesc}
+              ></DescButton>
+            </View>
+            <Text>{value.fullName}</Text>
+            <Text>{value.recentText}</Text>
+          </View>
+        ))}
       </View>
-      
     </ScrollView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    padding:20,
+  container: {
+    padding: 20,
     // margin:10,
-
   },
-  Searchbar:{
-    flexDirection:"row"
+  Searchbar: {
+    flexDirection: "row",
   },
-  postContainer:{
-    flexDirection:"column",
-    BorderWidth:20,
-    Border:10,
-    borderColor:"black"
+  postContainer: {
+    flexDirection: "column",
+    BorderWidth: 20,
+    Border: 10,
+    borderColor: "black",
   },
-  imageContainer:{
-    paddingTop:20,
-    margin:10,
-    height:500,
-    
-
+  imageContainer: {
+    paddingTop: 20,
+    margin: 10,
+    height: 500,
   },
-  ButtonConainer:{
-    flexDirection:"row",
-    paddingLeft:10,
-    
-  }
-
-})
+  ButtonConainer: {
+    flexDirection: "row",
+    paddingLeft: 10,
+  },
+});

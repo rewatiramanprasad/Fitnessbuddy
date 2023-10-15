@@ -7,7 +7,7 @@ import { DataTable } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Session } from "@supabase/supabase-js";
 // import { ScrollView } from "react-native-web"; #need enable when using web as output
-
+import Avatar from "../../components/common/Avatar";
 const Profile = () => {
   // const [session, setSession] = (useState < Session) | (null > null);
   const [session, setSession] = useState(null);
@@ -20,14 +20,13 @@ const Profile = () => {
   useEffect(() => {
     getStorageData();
     sessionData();
-
-    getProfile();
+    if (session) getProfile();
   }, []);
   const sessionData = async () => {
     try {
       const { data, error } = await supabase.auth.getSession();
       if (data) {
-        console.log("data", data);
+        console.log("data", data.session.user.id);
         setSession(data);
       }
       if (error) {
@@ -59,7 +58,7 @@ const Profile = () => {
     try {
       setLoading(true);
       if (!session?.user) throw new Error("No user on the session!");
-
+      console.log("you are in inside get profile ");
       let { data, error, status } = await supabase
         .from("profiles")
         .select(`email, website, avatar_url`)
@@ -68,7 +67,7 @@ const Profile = () => {
       if (error && status !== 406) {
         throw error;
       }
-
+      // console.log(data, error, status);
       if (data) {
         setData(data);
         console.log("that is my data", data);
@@ -77,6 +76,7 @@ const Profile = () => {
       if (error instanceof Error) {
         Alert.alert(error.message);
       }
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -94,7 +94,14 @@ const Profile = () => {
   return (
     <ScrollView style={styles.Container}>
       <View style={styles.imgContainer}>
-        <Image style={styles.image} src={Users.avatarUrl} />
+        {/* <Avatar
+          size={200}
+          url={avatarUrl}
+          onUpload={(url:string) => {
+            setAvatarUrl(url);
+            updateProfile({ username, website, avatar_url: url });
+          }}
+        /> */}
         <Text style={{ fontSize: 25, fontWeight: "bold", color: "darkgrey" }}>
           {Users.fullName}
         </Text>
@@ -126,8 +133,9 @@ const Profile = () => {
         </View>
       </View>
       <View>
-        <Text>{data}</Text>
-        {/* <Text>{}</Text> */}
+        <Text>{JSON.stringify(session)}</Text>
+        {/* <Text>{}<
+      /Text> */}
       </View>
       <View>
         <View style={[styles.fieldSet, styles.detailsContainer]}>

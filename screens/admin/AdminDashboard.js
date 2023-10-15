@@ -57,7 +57,7 @@ export default function AdminDashboard() {
   return (
     // <NavigationContainer>
     <Tab.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Home"
       activeColor="#f0edf6"
       inactiveColor="#3e2465"
       barStyle={{ backgroundColor: "orangered" }}
@@ -65,7 +65,7 @@ export default function AdminDashboard() {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={Login}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (

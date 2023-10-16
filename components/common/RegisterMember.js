@@ -54,7 +54,8 @@ export default function RegisterMember(props,{ navigation }) {
     if (data.length) {
       console.log(data);
       console.warn("New member added successfully.Check mail and verify it");
-      navigation.navigate("Members");
+      props.data();
+      // navigation.navigate("Members");
     }
   };
   // useEffect(() => {

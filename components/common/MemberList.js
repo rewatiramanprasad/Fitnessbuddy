@@ -4,13 +4,12 @@ import React, { useState } from "react";
 // import SupabaseAuth from "../Utilities/SupabaseAuth";
 import SwitchButton from "./SwitchButton";
 
-const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
+const MemberList = (props) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      
       style={[
         styles.item,
-        { backgroundColor },
         {
           borderRadius: 50,
           padding: 0,
@@ -31,17 +30,18 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
         <View style={{ flex: 1 }}>
           <Image
             style={{ height: 40, width: 40, borderRadius: 100 }}
-            src={item.avatarUrl}
+            src={props.item.avatarUrl}
           />
         </View>
-        <View style={{ flex: 1, flexDirection: "column" }}>
-          <Text>{item.name}</Text>
+        <View
+          style={{ flex: 1, flexDirection: "column" }}>
+          <Text onPress={()=>{console.log("ths is props",props); props.item.nav(props.item);}} >{props.item.name}</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text>{item.subscription}</Text>
+          <Text>{props.item.subscription}</Text>
         </View>
         <View style={{ flex: 1.2 }}>
-          <Text>{item.phone}</Text>
+          <Text>{props.item.phone}</Text>
         </View>
         <View style={{ flex: 1 }}>
           <SwitchButton />

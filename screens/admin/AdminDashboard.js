@@ -65,7 +65,7 @@ export default function AdminDashboard() {
     >
       <Tab.Screen
         name="Home"
-        component={Login}
+        component={Home}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (

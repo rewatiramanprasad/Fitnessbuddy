@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import supabase from "../../screens/Utilities/SupabaseAuth";
 import SwitchButton from "./SwitchButton";
 
-
-const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
+const MemberList = (props) => {
   const attendance = async () => {
     try {
       const { data, error } = await supabase
@@ -26,7 +25,6 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
 
   return (
     <TouchableOpacity
-      
       style={[
         styles.item,
         {
@@ -51,9 +49,15 @@ const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
             src={props.item.avatarUrl}
           />
         </View>
-        <View
-          style={{ flex: 1, flexDirection: "column" }}>
-          <Text onPress={()=>{console.log("ths is props",props); props.item.nav(props.item);}} >{props.item.name}</Text>
+        <View style={{ flex: 1, flexDirection: "column" }}>
+          <Text
+            onPress={() => {
+              console.log("ths is props", props);
+              props.item.nav(props.item);
+            }}
+          >
+            {props.item.name}
+          </Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text>{props.item.subscription}</Text>

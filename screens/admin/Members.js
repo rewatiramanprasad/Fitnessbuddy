@@ -6,6 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
+  SafeAreaView,
 } from "react-native";
 
 import React, { StrictMode, useState, useEffect } from "react";
@@ -15,13 +17,13 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import MemberList from "../../components/common/MemberList";
 import supabase from "../Utilities/SupabaseAuth";
 
-export default function Members({navigation}) {
+export default function Members({ navigation }) {
   const [isVisible, setVisible] = useState(false);
   const [users, setUsers] = useState([]);
-  function nav(it){
-    console.log("we are rcvng",it);
-    
-    navigation.navigate("MemberProfile",{"data":it});
+  function nav(it) {
+    console.log("we are rcvng", it);
+
+    navigation.navigate("MemberProfile", { data: it });
   }
   function endModal() {
     setVisible(false);
@@ -39,11 +41,12 @@ export default function Members({navigation}) {
     if (error) {
       console.log(error);
     }
-    console.log("this is datta",data);
-    for(let i of data){i["nav"]=nav}
+    console.log("this is datta", data);
+    for (let i of data) {
+      i["nav"] = nav;
+    }
 
     setUsers(data);
-
   };
   // const render = ({ item }) => {
   //   const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
@@ -61,39 +64,48 @@ export default function Members({navigation}) {
   // };
 
   return (
-    <View style={[styles.outerContainer, { flexDirection: "column" }]}>
-      <View style={{ flexDirection: "row" }}>
-        <TextInput
-          placeholderColor="red"
-          style={{
-            flex: 2,
-            borderColor: "orangered",
-            backgroundColor: "#f0edf6",
-            color: "black",
-            borderRadius: 50,
-            paddingLeft: 20,
-            borderWidth: 1,
-          }}
-          placeholder="search ..."
-        />
-        <PrimaryButton
-          style={{ flex: 1, borderRadius: 100 }}
-          onPress={startModal}
-        >
-          Add
-        </PrimaryButton>
-      </View>
-      <View>
-        <RegisterMember visible={isVisible} endModal={endModal} data={data}/>
+    <>
+      <StatusBar />
+      <SafeAreaView>
+        <View style={[styles.outerContainer, { flexDirection: "column" }]}>
+          <View style={{ flexDirection: "row" }}>
+            <TextInput
+              placeholderColor="red"
+              style={{
+                flex: 2,
+                borderColor: "orangered",
+                backgroundColor: "#f0edf6",
+                color: "black",
+                borderRadius: 50,
+                paddingLeft: 20,
+                borderWidth: 1,
+              }}
+              placeholder="search ..."
+            />
+            <PrimaryButton
+              style={{ flex: 1, borderRadius: 100 }}
+              onPress={startModal}
+            >
+              Add
+            </PrimaryButton>
+          </View>
+          <View>
+            <RegisterMember
+              visible={isVisible}
+              endModal={endModal}
+              data={data}
+            />
 
-        <FlatList
-          data={users}
-          renderItem={MemberList}
-          keyExtractor={(item) => item.id}
-          extraData={nav}
-        />
-      </ScrollView>
-    </View>
+            <FlatList
+              data={users}
+              renderItem={MemberList}
+              keyExtractor={(item) => item.id}
+              extraData={nav}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 

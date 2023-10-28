@@ -15,9 +15,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import MemberList from "../../components/common/MemberList";
 import supabase from "../Utilities/SupabaseAuth";
 
-export default function Members() {
+export default function Members({navigation}) {
   const [isVisible, setVisible] = useState(false);
   const [users, setUsers] = useState([]);
+  function nav(it){
+    console.log("we are rcvng",it);
+    
+    navigation.navigate("MemberProfile",{"data":it});
+  }
   function endModal() {
     setVisible(false);
   }
@@ -34,8 +39,11 @@ export default function Members() {
     if (error) {
       console.log(error);
     }
-    console.log(data);
+    console.log("this is datta",data);
+    for(let i of data){i["nav"]=nav}
+
     setUsers(data);
+
   };
   // const render = ({ item }) => {
   //   const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
@@ -75,12 +83,14 @@ export default function Members() {
           Add
         </PrimaryButton>
       </View>
-      <ScrollView>
-        <RegisterMember visible={isVisible} endModal={endModal} />
+      <View>
+        <RegisterMember visible={isVisible} endModal={endModal} data={data}/>
+
         <FlatList
           data={users}
           renderItem={MemberList}
           keyExtractor={(item) => item.id}
+          extraData={nav}
         />
       </ScrollView>
     </View>

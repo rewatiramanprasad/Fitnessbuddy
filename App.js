@@ -19,6 +19,8 @@ import Home from "./screens/admin/Home";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ThanksYou from "./screens/admin/ThankYou";
 import MemberList from "./components/common/MemberList";
+import Members from "./screens/admin/Members";
+import MemberProfile from "./screens/admin/MemberProfile";
 // import Signup from './screens/admin/signup';
 
 const Stack = createNativeStackNavigator();
@@ -82,7 +84,7 @@ export default function App() {
         { isLoggedIn|| false ? (
           <>
             <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
-            <Stack.Screen name="MemberList" component={MemberList} />
+            {/* <Stack.Screen name="MemberList" component={MemberList} /> */}
           </>
         ) : (
           <>
@@ -91,8 +93,12 @@ export default function App() {
           </>
         )}
 
+
         <Stack.Group>
           <Stack.Screen name="ThanksYou" component={ThanksYou} />
+          <Stack.Screen name="Members" component={Members} />
+          <Stack.Screen name="MemberList" component={MemberList} />
+          <Stack.Screen name="MemberProfile" component={MemberProfile} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

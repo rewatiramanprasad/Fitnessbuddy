@@ -1,18 +1,21 @@
-import { Alert, StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
-import { Switch } from 'react-native-paper'
-export default function SwitchButton(props) {
-const [clickSwitch,setClickSwitch]=useState(false);
+import { Alert, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { Switch } from "react-native-paper";
+export default function SwitchButton({ Attendance }) {
+  const [clickSwitch, setClickSwitch] = useState(false);
 
   return (
     <View>
-      <Switch value={clickSwitch}
-       onValueChange={()=>{
-        setClickSwitch(!clickSwitch)
-        console.log("clicke me")
-        }} />
+      <Switch
+        value={clickSwitch}
+        onValueChange={() => {
+          setClickSwitch(!clickSwitch);
+          Attendance();
+          console.log("i'm switch button");
+        }}
+      />
     </View>
-  )
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

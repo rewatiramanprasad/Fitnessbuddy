@@ -65,8 +65,8 @@ export default function Members({ navigation }) {
 
   return (
     <>
-      <StatusBar />
       <SafeAreaView>
+        <StatusBar barStyle={"dark-content"} />
         <View style={[styles.outerContainer, { flexDirection: "column" }]}>
           <View style={{ flexDirection: "row" }}>
             <TextInput

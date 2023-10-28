@@ -30,12 +30,11 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const _retriveData = async () => {
     const data = JSON.parse(await AsyncStorage.getItem("isLoggedIn"));
-    console.log("is user logged ", typeof( data),data);
-    if (data==null){
-      setIsLoggedIn(false)
+    console.log("is user logged ", typeof data, data);
+    if (data == null) {
+      setIsLoggedIn(false);
     }
     setIsLoggedIn(data);
-
   };
   useEffect(() => {
     _retriveData();
@@ -77,11 +76,8 @@ export default function App() {
   // onLayoutRootView();
   return (
     <NavigationContainer>
-      <Stack.Navigator 
-                  screenOptions={{ headerShown: false }} 
-
-      >
-        { isLoggedIn|| false ? (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {isLoggedIn || false ? (
           <>
             <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
             {/* <Stack.Screen name="MemberList" component={MemberList} /> */}
@@ -92,7 +88,6 @@ export default function App() {
             <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
           </>
         )}
-
 
         <Stack.Group>
           <Stack.Screen name="ThanksYou" component={ThanksYou} />

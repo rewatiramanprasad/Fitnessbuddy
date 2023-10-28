@@ -7,7 +7,7 @@ import { DataTable } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Session } from "@supabase/supabase-js";
 // import { ScrollView } from "react-native-web"; #need enable when using web as output
-import Avatar from "../../components/common/Avatar";
+// import Avatar from "../../components/common/Avatar";
 const Profile = () => {
   // const [session, setSession] = (useState < Session) | (null > null);
   const [session, setSession] = useState(null);
@@ -94,14 +94,14 @@ const Profile = () => {
   return (
     <ScrollView style={styles.Container}>
       <View style={styles.imgContainer}>
-        <Avatar
+        {/* <Avatar
           size={200}
           url={avatarUrl}
           onUpload={(url) => {
             setAvatarUrl(url);
             updateProfile({ username, website, avatar_url: url });
           }}
-        />
+        /> */}
         <Text style={{ fontSize: 25, fontWeight: "bold", color: "darkgrey" }}>
           {Users.fullName}
         </Text>

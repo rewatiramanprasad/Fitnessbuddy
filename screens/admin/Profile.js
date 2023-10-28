@@ -94,14 +94,14 @@ const Profile = () => {
   return (
     <ScrollView style={styles.Container}>
       <View style={styles.imgContainer}>
-        {/* <Avatar
+        <Avatar
           size={200}
           url={avatarUrl}
-          onUpload={(url:string) => {
+          onUpload={(url) => {
             setAvatarUrl(url);
             updateProfile({ username, website, avatar_url: url });
           }}
-        /> */}
+        />
         <Text style={{ fontSize: 25, fontWeight: "bold", color: "darkgrey" }}>
           {Users.fullName}
         </Text>

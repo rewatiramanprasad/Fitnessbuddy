@@ -1,10 +1,29 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import React, { useState } from "react";
 // import { Switch } from 'react-native-paper'
-// import SupabaseAuth from "../Utilities/SupabaseAuth";
+import supabase from "../../screens/Utilities/SupabaseAuth";
 import SwitchButton from "./SwitchButton";
 
-const MemberList = (props) => {
+
+const MemberList = ({ item, onPress, backgroundColor, textColor }) => {
+  const attendance = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("attendance")
+        .insert([{ uuid: item.uuid }])
+        .select();
+      if (error) {
+        console.log(error);
+      }
+      // throw new Error(error);
+      if (data) {
+        console.log("Attendance marked in!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <TouchableOpacity
       
@@ -16,7 +35,6 @@ const MemberList = (props) => {
           borderWidth: 1,
           marginVertical: 6,
           marginHorizontal: 2,
-          
         },
       ]}
     >
@@ -44,7 +62,7 @@ const MemberList = (props) => {
           <Text>{props.item.phone}</Text>
         </View>
         <View style={{ flex: 1 }}>
-          <SwitchButton />
+          <SwitchButton Attendance={attendance} />
         </View>
       </View>
     </TouchableOpacity>

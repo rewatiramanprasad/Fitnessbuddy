@@ -1,6 +1,13 @@
-import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+} from "react-native";
 import React, { useState } from "react";
-import { TextInput } from "react-native-paper";
+// import { TextInput } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import PrimaryButton from "../../components/common/PrimaryButton";
 
@@ -68,22 +75,23 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ elevate: 10, backgroundColor: "rgb(229 225 245)" }}>
+      <View style={{ elevate: 10, backgroundColor: "#f5f5f5" }}>
         <View style={styles.titleConatiner}>
           <Text style={styles.title}>💪ogin</Text>
         </View>
-        <View style={styles.titleConatiner}>
+        <View style={[styles.titleConatiner]}>
           <TextInput
             placeholder="User Name"
-            style={{ width: 270 }}
+            style={styles.input}
             value={email}
             onChangeText={(e) => {
               setEmail(e);
             }}
           />
+
           <TextInput
             placeholder="Password"
-            style={{ width: 270 }}
+            style={styles.input}
             secureTextEntry={isPasswordSecure}
             value={password}
             onChangeText={(e) => {
@@ -109,14 +117,16 @@ const Login = ({ navigation }) => {
           {loading ? (
             <ActivityIndicator size="large" color="orangered" />
           ) : (
-            <PrimaryButton style={styles.Button} onPress={login}>
-              Login
-            </PrimaryButton>
+            <View style={{ marginTop: 20 }}>
+              <PrimaryButton style={styles.Button} onPress={login}>
+                Login
+              </PrimaryButton>
+            </View>
           )}
-          <Text onPress={() => navigation.navigate("AdminDashboard")}>
+          {/* <Text onPress={() => navigation.navigate("AdminDashboard")}>
             Signup
-          </Text>
-          <Text onPress={logout}>logout</Text>
+          </Text> */}
+          {/* <Text onPress={logout}>logout</Text> */}
         </View>
       </View>
     </View>
@@ -130,9 +140,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#f5f5f5",
     flexDirection: "column",
-    padding: 50,
+  },
+  input: {
+    borderWidth: 2,
+    borderRadius: 50,
+    borderColor: "orangered",
+    borderBottomColor: "orangered",
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "270",
+    marginTop: 10,
   },
   titleConatiner: {
     justifyContent: "center",
@@ -145,6 +165,7 @@ const styles = StyleSheet.create({
   },
   Button: {
     fontWeight: "bold",
-    backgroundColor: "Blue",
+    fontStyle: "underline",
+    marginTop: 20,
   },
 });
